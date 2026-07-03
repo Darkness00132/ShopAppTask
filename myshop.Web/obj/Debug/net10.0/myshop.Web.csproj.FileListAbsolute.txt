@@ -799,10 +799,10 @@ C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debu
 C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debug\net10.0\swae.build.ex.cache
-C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debug\net10.0\myshop.Web.csproj.Up2Date
 C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debug\net10.0\myshop.Web.dll
 C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debug\net10.0\refint\myshop.Web.dll
 C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debug\net10.0\myshop.Web.pdb
 C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debug\net10.0\myshop.Web.genruntimeconfig.cache
 C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debug\net10.0\ref\myshop.Web.dll
+C:\Users\Darkness00132\source\repos\ShopHub-Startup-Template\myshop.Web\obj\Debug\net10.0\myshop.Web.MvcApplicationPartsAssemblyInfo.cs

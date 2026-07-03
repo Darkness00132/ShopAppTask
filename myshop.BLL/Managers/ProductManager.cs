@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using myshop.BLL.DTOs.Product;
 using myshop.DAL.Repostiories;
 using myshop.Entities.Models;
@@ -50,7 +49,7 @@ namespace myshop.BLL.Mangers
             return product;
         }
 
-        public async Task UpdateProductAsync(int id , UpdateProduct dto, string RootPath) 
+        public async Task UpdateProductAsync(int id, UpdateProduct dto, string RootPath)
         {
             var product = await _repository.FindOneAsync(id);
             if (dto.File != null)
@@ -80,7 +79,7 @@ namespace myshop.BLL.Mangers
             await _unitOfWork.SaveChangesAsync();
         }
 
-       public async Task<bool> DeleteProductAsync(int id,string RootPath)
+        public async Task<bool> DeleteProductAsync(int id, string RootPath)
         {
             var productIndb = await _repository.FindOneAsync(id);
 
@@ -100,6 +99,6 @@ namespace myshop.BLL.Mangers
 
             await _unitOfWork.SaveChangesAsync();
             return true;
-        } 
+        }
     }
 }

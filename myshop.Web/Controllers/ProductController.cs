@@ -69,7 +69,7 @@ namespace myshop.Web.Areas.Admin.Controllers
                 TempData["Create"] = "Item has Created Successfully";
                 return RedirectToAction("Index");
             }
-            return View(product);
+            return View(productVM);
         }
 
         [HttpGet]

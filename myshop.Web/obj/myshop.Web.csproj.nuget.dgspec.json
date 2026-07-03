@@ -60,9 +60,9 @@
               "target": "Package",
               "version": "[16.2.0, )"
             },
-            "Microsoft.AspNetCore.Http.Features": {
+            "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
-              "version": "[5.0.17, )"
+              "version": "[2.3.11, )"
             },
             "NuGet.Protocol": {
               "target": "Package",

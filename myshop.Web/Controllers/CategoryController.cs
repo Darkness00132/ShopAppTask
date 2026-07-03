@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using myshop.BLL.DTOs.Category;
 using myshop.BLL.Managers;
-using myshop.DataAccess;
-using myshop.Entities.Models;
 
 namespace myshop.Web.Areas.Admin.Controllers
 {

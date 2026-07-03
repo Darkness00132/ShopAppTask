@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace myshop.Entities.Models
+﻿namespace myshop.Entities.Models
 {
     public class Category
     {
