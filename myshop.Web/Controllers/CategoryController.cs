@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using myshop.BLL.DTOs.Category;
+using myshop.BLL.Managers;
 using myshop.DataAccess;
 using myshop.Entities.Models;
 
@@ -6,33 +8,32 @@ namespace myshop.Web.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly CategoryManager _categoryManager;
 
-        public CategoryController(ApplicationDbContext context)
+        public CategoryController(CategoryManager categoryManager)
         {
-            _context = context;
+            _categoryManager = categoryManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var categories = _context.Categories.ToList();
+            var categories = await _categoryManager.GetAllCategoriesAsync();
             return View(categories);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Category category)
+        public async Task<IActionResult> Create(CreateCategory category)
         {
             if (ModelState.IsValid)
             {
-                _context.Categories.Add(category);
-                _context.SaveChanges();
+                await _categoryManager.AddCategoryAsync(category);
+
                 TempData["Create"] = "Item has Created Successfully";
                 return RedirectToAction("Index");
             }
@@ -40,25 +41,23 @@ namespace myshop.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null | id == 0)
+            if (id == 0)
             {
-                NotFound();
+                return NotFound();
             }
-            var categoryIndb = _context.Categories.Find(id);
+            var categoryIndb = await _categoryManager.GetCategoryByIdAsync(id);
 
             return View(categoryIndb);
         }
 
         [HttpPost]
-        public IActionResult Edit(Category category)
+        public async Task<IActionResult> Edit(UpdateCategory category)
         {
             if (ModelState.IsValid)
             {
-                _context.Categories.Update(category);
-
-                _context.SaveChanges();
+                await _categoryManager.UpdateCategoryAsync(category);
                 TempData["Update"] = "Data has Updated Successfully";
                 return RedirectToAction("Index");
             }
@@ -66,27 +65,27 @@ namespace myshop.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null | id == 0)
+            if (id == 0)
             {
-                NotFound();
+                return NotFound();
             }
-            var categoryIndb = _context.Categories.Where(x => x.Id == id).FirstOrDefault();
+
+            var categoryIndb = await _categoryManager.GetCategoryByIdAsync(id);
 
             return View(categoryIndb);
         }
 
         [HttpPost]
-        public IActionResult DeleteCategory(int? id)
+        public async Task<IActionResult> DeleteCategory(int id)
         {
-            var categoryIndb = _context.Categories.FirstOrDefault(x => x.Id == id);
+            var categoryIndb = await _categoryManager.GetCategoryByIdAsync(id);
             if (categoryIndb == null)
             {
-                NotFound();
+                return NotFound();
             }
-            _context.Categories.Remove(categoryIndb);
-            _context.SaveChanges();
+            await _categoryManager.DeleteCategoryAsync(id);
             TempData["Delete"] = "Item has Deleted Successfully";
             return RedirectToAction("Index");
         }
