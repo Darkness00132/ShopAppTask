@@ -1,4 +1,38 @@
+# Visual Studio
 .vs/
-myshop.Web/appsettings.json
-myshop.Web/bin/Debug/net7.0/appsettings.json
-/myshop.Web/myshop.Web.csproj
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+**/bin/
+**/obj/
+
+# Test results
+TestResults/
+*.trx
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+
+# Logs
+*.log
+
+# ASP.NET Core
+**/appsettings.Development.json
+
+# User secrets
+**/secrets.json
+
+# OS files
+.DS_Store
+Thumbs.db
