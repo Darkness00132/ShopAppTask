@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using myshop.BLL.DTOs.Product;
 using myshop.BLL.Managers;
@@ -8,6 +9,7 @@ using myshop.Entities.ViewModels;
 
 namespace myshop.Web.Areas.Admin.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     public class ProductController : Controller
     {
         private readonly ProductManager _productManager;

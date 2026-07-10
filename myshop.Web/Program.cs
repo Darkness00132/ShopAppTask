@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using myshop.BLL.Managers;
 using myshop.BLL.Mangers;
+using myshop.DAL.Enums;
+using myshop.DAL.Models;
 using myshop.DAL.Repostiories;
 using myshop.DataAccess;
 using myshop.Entities.Models;
@@ -19,12 +21,14 @@ options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
-    options => options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(4)
-    )
-    .AddDefaultTokenProviders()
-    .AddDefaultUI()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<AppUser, AppRole>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(4);
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders()
+.AddDefaultUI();
 
 builder.Services.AddAutoMapper(config => config.AddMaps(AppDomain.CurrentDomain.GetAssemblies()));
 
@@ -45,13 +49,19 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    db.Database.Migrate();
+    var manager = scope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
+
+    foreach (UserRoles role in Enum.GetValues<UserRoles>())
+    {
+        if (!await manager.RoleExistsAsync(role.ToString()))
+        {
+            await manager.CreateAsync(new AppRole
+            {
+                Name = role.ToString()
+            });
+        }
+    }
 }
-
-
-
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -69,17 +79,18 @@ app.UseRouting();
 
 app.UseAuthentication();
 
-app.UseAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy =>
+        policy.RequireRole("Admin"));
+});
 
 app.UseSession();
 
 app.MapRazorPages();
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Product}/{action=Index}/{id?}");
 
 app.Run();
-

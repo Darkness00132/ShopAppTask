@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using myshop.BLL.DTOs.Category;
 using myshop.BLL.Managers;
 
 namespace myshop.Web.Areas.Admin.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     public class CategoryController : Controller
     {
         private readonly CategoryManager _categoryManager;

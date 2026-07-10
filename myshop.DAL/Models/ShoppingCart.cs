@@ -16,6 +16,6 @@ namespace myshop.Entities.Models
         public string ApplicationUserId { get; set; }
 
         [ForeignKey("ApplicationUserId")]
-        public ApplicationUser ApplicationUser { get; set; }
+        public AppUser ApplicationUser { get; set; }
     }
 }
