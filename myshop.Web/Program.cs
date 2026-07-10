@@ -45,6 +45,12 @@ builder.Services.AddScoped<UnitOfWork>();
 builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddScoped<ProductRepository>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy =>
+        policy.RequireRole("Admin"));
+});
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -79,11 +85,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminOnly", policy =>
-        policy.RequireRole("Admin"));
-});
+app.UseAuthorization();
 
 app.UseSession();
 
